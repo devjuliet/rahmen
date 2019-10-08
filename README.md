@@ -1,6 +1,8 @@
 # rahmen
 Rahmen es un proyecto de clase cuyo proposito es facilitar el manejo de proyectos de software bajo el marco de trabajo SCRUM.<br>
-Permite manejar multiples proyectos mediante un backlog de proyecto, asi como el control por medio de sprints, permite manejar los equipos de trabajo y conocer en que proyectos estan trabajando o en cuales han trabajado
+Permite
+- Manejar multiples proyectos mediante un backlog de proyecto, asi como el control por medio de sprints
+- Manejar los equipos de trabajo y conocer en que proyectos estan trabajando o en cuales han trabajado
 
 ## Prerequsitos
 - Docker
