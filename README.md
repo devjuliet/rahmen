@@ -20,7 +20,7 @@ docker run --name rahmen -d -p 8080:80 rahmen-nginx
 - Jose Manuel Padilla Caro
 - Jorge Alejandro Romero Garcia
 ### Materia
-Plataformas web
+Plataformas Web
 
 ## Agradecimientos
 - **[Start Bootstrap - SB Admin](https://github.com/BlackrockDigital/startbootstrap-sb-admin)** - Template utilizado
