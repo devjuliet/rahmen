@@ -1,6 +1,5 @@
 # rahmen
-Rahmen es un proyecto de clase cuyo proposito es facilitar el manejo de proyectos de software bajo el marco de trabajo SCRUM.<br>
-Permite
+Rahmen es un proyecto de clase cuyo proposito es facilitar el manejo de proyectos de software bajo el marco de trabajo SCRUM el cual tiene las siguientes funcionalidades:
 - Manejar multiples proyectos mediante un backlog de proyecto, asi como el control por medio de sprints
 - Manejar los equipos de trabajo y conocer en que proyectos estan trabajando o en cuales han trabajado
 
