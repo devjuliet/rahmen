@@ -1,6 +1,8 @@
 # rahmen
 Proyecto Web Plataforms
 
+## Prerequsitos
+- Docker
 <!--  -->
 ## Ejecutando el proyecto
 Desde la raiz del proyecto, generar la imagen de Docker haciendo
