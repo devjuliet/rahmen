@@ -1,5 +1,5 @@
 # rahmen
-Proyecto Web Plataforms
+Rahmen es un proyecto de clase cuyo proposito es facilitar el manejo de proyectos de software bajo el marco de trabajo SCRUM
 
 ## Prerequsitos
 - Docker
@@ -19,6 +19,8 @@ docker run --name rahmen -d -p 8080:80 rahmen-nginx
 - Cristhoper Ochoa Gutierrez
 - Jose Manuel Padilla Caro
 - Jorge Alejandro Romero Garcia
+### Materia
+**Plataformas web**
 
 ## Agradecimientos
 - **[Start Bootstrap - SB Admin](https://github.com/BlackrockDigital/startbootstrap-sb-admin)** - Template utilizado
