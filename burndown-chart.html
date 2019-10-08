@@ -104,16 +104,23 @@
 
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="index.html">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="projects.html">Projects</a>
-                    </li>
-                    <li class="breadcrumb-item active">Wendy's</li>
-                </ol>
-
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="projects.html">Projects</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="project-page.html">Wendy's</a>
+                        </li>
+    
+                        <li class="breadcrumb-item active">Burndown Chart</li>
+                    </ol>
                 <!-- Page Content -->
+                <h1>Wendy's</h1>
+                <hr>
+                <h3>Burndown Chart</h3>
+                <hr>
 
                 <script>
                     window.onload = function () {
@@ -121,9 +128,7 @@
                     var chart = new CanvasJS.Chart("chartContainer", {
                         animationEnabled: true,
                         theme: "light2",
-                        title:{
-                            text: "Burndown Chart -Sprint-"
-                        },
+                        
                         axisX:{
                             valueFormatString: "DD MMM",
                             crosshair: {
@@ -214,7 +219,9 @@
                     </body>
                     </html>
 
-                    <div class="row d-flex justify-content-center">
+                    <hr>
+
+                    <div class="row d-flex justify-content-left">
 
                             <div class="col-lg-6">
                               <div class="card mb-3 ">
@@ -237,7 +244,6 @@
                                   </dl>
                                 </div>
                                 <div class="card-footer small text-muted">
-                                  <br>
                                   <p class="text-center">Wendy's Project</p>
                                 </div>
                   
