@@ -14,7 +14,7 @@ Para ejecutarlo, podemos hacer
 docker run --name rahmen -d -p 8080:80 rahmen-nginx 
 ```
 ## Autores
-- Sebastían de la Riva Rivera 
+- Sebastián de la Riva Rivera 
 - Julieta Navarro Rivera
 - Cristhoper Ochoa Gutierrez
 - Jose Manuel Padilla Caro
