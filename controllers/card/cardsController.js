@@ -40,10 +40,9 @@ function create(req, res, next){
     let benefict = req.body.benefict;
     let context = req.body.context;
     let results = req.body.results;
-    let results = req.body.results;
 
     let card = new Card({_cardId: cardId,_backlogId:backlogId,_cardPriority:cardPriority,_cardName:cardName,_role:role,
-                                _feature:feature,_benefict:benefict,_context:context,_results:results,_results:results});  
+                                _feature:feature,_benefict:benefict,_context:context,_results:results});  
     card.save()
     .then((obj)=>{
       res.json(obj);
