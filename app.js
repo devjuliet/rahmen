@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
+const cardRouter = require('./routes/cards');
+const projectRouter = require('./routes/projects');
 const usersRouter = require('./routes/users');
 const backlogsRouter = require('./routes/backlogs');
 const membersRouter = require('./routes/members');
@@ -29,6 +31,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/backlogs', backlogsRouter);
 app.use('/members',membersRouter);
+app.use('/cards',cardRouter);
+app.use('projects',projectRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
