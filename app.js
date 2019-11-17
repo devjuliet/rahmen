@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const backlogsRouter = require('./routes/backlogs')
+const backlogsRouter = require('./routes/backlogs');
+const membersRouter = require('./routes/members');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -27,6 +28,7 @@ mongoose.connect('mongodb://127.0.0.1/rahmen', {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/backlogs', backlogsRouter);
+app.use('/members',membersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

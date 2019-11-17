@@ -26,7 +26,7 @@ function index(req, res, next){
         if (err){}
         res.json(resp);
     });
-  }
+}
 function create(req, res, next){
     let backlogId = req.body.backlogId;
     let projectId = req.body.projectId;
