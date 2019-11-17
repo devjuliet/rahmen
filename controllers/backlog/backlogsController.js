@@ -69,22 +69,6 @@ function destroy(req,res,next){
         });
     });
 }
-/*
-Backlog.findOne({_backlogId : id})
-    .then(obj =>{
-        obj._backlogType = req.body.backlogType ? req.body.backlogType : obj._backlogType;
-        obj._endDate = req.body.endDate ? req.body.endDate : obj._endDate;
-        obj.save()
-            .then(o =>{
-                res.status(200).json({
-                    errors: [],
-                    data: o
-                });
-            })
-            .catch(err =>{});
-    })
-    .catch(err =>{});
-*/
 module.exports = {
     list,index,create,update,destroy
 }
