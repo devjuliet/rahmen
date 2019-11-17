@@ -11,13 +11,17 @@ function list(req, res, next) {
     Card.paginate({}, options)
         .then(cards => {
             res.json({
-                message: 'Ok',
+                message: res.__('ok'),
                 error: false,
                 objs: cards 
             });
         })
-        .catch(() => {
-
+        .catch((err) => {
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
         });
 }
 
@@ -25,8 +29,18 @@ function index(req, res, next){
     let id = req.params.id;
     let query = Card.findOne({_cardId: id});
     query.exec((err,resp) =>{
-        if (err){}
-        res.json(resp);
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }
+        res.status(200).json({
+            message: res.__('ok'),
+            error:false,
+            data: resp
+        });
     });
 }
 
@@ -46,10 +60,18 @@ function create(req, res, next){
                                 _feature:feature,_benefict:benefict,_context:context,_results:results,_results:results});  
     card.save()
     .then((obj)=>{
-      res.json(obj);
+        res.status(200).json({
+            message: res.__('ok'),
+            error: false,
+            objs: obj
+        });
     })
     .catch((err)=>{
-      res.status(500).json({});
+        res.status(500).json({
+            message: res.__('error'),
+            error: true,
+            objs: err
+        });
     });
 }
 
@@ -85,11 +107,18 @@ function update(req,res,next){
             obj.save()
             .then(o =>{
                 res.status(200).json({
-                    errors: [],
-                    data: o
+                    message: res.__('ok'),
+                    error: false,
+                    objs: o
                 });
             })
-            .catch(err =>{});////Todo: Errors
+            .catch(err =>{
+                res.status(500).json({
+                    message: res.__('error'),
+                    error: true,
+                    objs: err
+                });
+            });
         }
     });
 }
@@ -97,10 +126,19 @@ function update(req,res,next){
 function destroy(req,res,next){
     let id = req.params.id;
     Card.findOneAndDelete({_cardId : id},(err,resp) =>{
-        res.status(200).json({
-            errors: [],
-            data: resp
-        });
+        if(err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                data: resp
+            });
+        }
     });
 }
 

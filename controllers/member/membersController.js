@@ -9,22 +9,37 @@ function list(req, res, next) {
 
     Member.paginate({}, options)
         .then(member => {
-            res.json({
-                message: 'Ok',
+            res.status(200).json({
+                message: res.__('ok'),
                 error: false,
                 objs: member
             });
         })
-        .catch(() => {
-
+        .catch((err) => {
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
         });
 }
 function index(req, res, next) {
     let id = req.params.id;
     let query = Member.findOne({ _devId: id });
     query.exec((err, resp) => {
-        if (err) { }
-        res.json(resp);
+        if (err) { 
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
     });
 }
 function create(req, res, next) {
@@ -48,16 +63,30 @@ function create(req, res, next) {
     });
     member.save()
         .then((obj) => {
-            res.json(obj);
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: obj
+            });
         })
         .catch((err) => {
-            res.status(500).json({});
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
         });
 }
 function update(req, res, next) {
     let id = req.params.id;
     Member.findOne({ _devId: id }, (err, obj) => {
-        if (err) { }
+        if (err) { 
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }
         else {
             obj._devName = req.body.devName ? req.body.devName : obj._devName;
             obj._devTeam = req.body.devTeam ? req.body.devTeam : obj._devTeam;
@@ -69,21 +98,37 @@ function update(req, res, next) {
             obj.save()
                 .then(o => {
                     res.status(200).json({
-                        errors: [],
-                        data: o
+                        message: res.__('ok'),
+                        error: false,
+                        objs: o
                     });
                 })
-                .catch(err => { });////Todo: Errors
+                .catch(err => {
+                    res.status(500).json({
+                        message: res.__('error'),
+                        error: true,
+                        objs: err
+                    });
+                 });
         }
     });
 }
 function destroy(req, res, next) {
     let id = req.params.id;
     Member.findOneAndDelete({ _devId: id }, (err, resp) => {
-        res.status(200).json({
-            errors: [],
-            data: resp
-        });
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
     });
 }
 

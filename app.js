@@ -11,9 +11,16 @@ const usersRouter = require('./routes/users');
 const backlogsRouter = require('./routes/backlogs');
 const membersRouter = require('./routes/members');
 const teamsRouter = require('./routes/teams');
-const mongoose = require('mongoose');
 const config = require('config')
+const i18n = require('i18n');
+
 const app = express();
+
+i18n.configure({
+  locales:['en', 'es'],
+  cookie: 'language',
+  directory: __dirname + '/locales'
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(i18n.init);
 
 const jwtKey = config.get("secret.key");
 

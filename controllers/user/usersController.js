@@ -3,25 +3,25 @@ const bcrypt = require('bcrypt');
 const async = require('async');
 const User = require('../../models/user');
 
-function list(req, res, next){
+function list(req, res, next) {
 
 }
 
-function index(req, res, next){
-  
+function index(req, res, next) {
+
 }
 
-function create(req, res, next){
+function create(req, res, next) {
   let email = req.body.email;
   let name = req.body.name;
   let lastName = req.body.lastName;
   let password = req.body.password;
 
   async.parallel({
-    salt: (callback)=>{
+    salt: (callback) => {
       bcrypt.genSalt(10, callback);
     }
-  }, (err, result)=>{
+  }, (err, result) => {
 
     bcrypt.hash(password, result.salt, (err, hash) => {
       let user = new User({
@@ -32,27 +32,27 @@ function create(req, res, next){
         _salt: result.salt
       });
 
-      user.save().then((obj)=>{
+      user.save().then((obj) => {
         res.status(200).json({
           error: false,
-          message: 'usuario creado correctamente',
+          message: res.__('user.save'),
           objs: obj
         });
       }).catch(err => res.status(500).json({
         error: true,
-        message: 'usuario no se ha creado',
+        message: res.__('user.error'),
         objs: err
       }));
     });
   });
 }
 
-function update(req, res, next){
-  
+function update(req, res, next) {
+
 }
 
-function destroy(req, res, next){
-  
+function destroy(req, res, next) {
+
 }
 
 module.exports = {
