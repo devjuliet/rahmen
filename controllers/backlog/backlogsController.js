@@ -9,22 +9,36 @@ function list(req, res, next) {
 
     Backlog.paginate({}, options)
         .then(backlogs => {
-            res.json({
-                message: 'Ok',
+            res.status(200).json({
+                message: res.___('ok'),
                 error: false,
                 objs: backlogs 
             });
         })
-        .catch(() => {
-
+        .catch((error) => {
+            res.status(500).json({
+                message: res.___('error'),
+                error: true,
+                objs: error
+            });
         });
 }
 function index(req, res, next){
     let id = req.params.id;
     let query = Backlog.findOne({_backlogId: id});
     query.exec((err,resp) =>{
-        if (err){}
-        res.json(resp);
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: error
+            });
+        }
+        res.status(200).json({
+            message: res.__('ok'),
+            error:false,
+            objs: resp
+        });
     });
 }
 function create(req, res, next){
@@ -35,12 +49,20 @@ function create(req, res, next){
     let backlog = new Backlog({_backlogId : backlogId,_projectId: projectId,_backlogType: backlogType,_endDate: endDate});  
     backlog.save()
     .then((obj)=>{
-      res.json(obj);
+      res.status(200).json({
+          error: false,
+          message: res.__('ok'),
+          objs: obj
+      });
     })
     .catch((err)=>{
-      res.status(500).json({});
+      res.status(500).json({
+          message: res_('error'),
+          error: true,
+          objs: err
+      });
     });
-  }
+}
 function update(req,res,next){
     let id = req.params.id;
     Backlog.findOne({_backlogId: id},(err,obj) =>{
@@ -51,11 +73,18 @@ function update(req,res,next){
             obj.save()
             .then(o =>{
                 res.status(200).json({
-                    errors: [],
-                    data: o
+                    message: res.__('ok'),
+                    error: false,
+                    objs: o
                 });
             })
-            .catch(err =>{});////Todo: Errors
+            .catch(err =>{
+                res.status(500).json({
+                    message: res.__('error'),
+                    error: true,
+                    objs: err
+                });        
+            });
         }
     });
 }
@@ -63,10 +92,20 @@ function update(req,res,next){
 function destroy(req,res,next){
     let id = req.params.id;
     Backlog.findOneAndDelete({_backlogId : id},(err,resp) =>{
-        res.status(200).json({
-            errors: [],
-            data: resp
-        });
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }
+        else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
     });
 }
 module.exports = {

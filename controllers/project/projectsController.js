@@ -11,13 +11,17 @@ function list(req, res, next) {
     Project.paginate({}, options)
         .then(projects => {
             res.json({
-                message: 'Ok',
+                message: res.__('ok'),
                 error: false,
                 objs: projects 
             });
         })
-        .catch(() => {
-
+        .catch((err) => {
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
         });
 }
 
@@ -25,8 +29,19 @@ function index(req, res, next){
     let id = req.params.id;
     let query = Project.findOne({_projectId: id});
     query.exec((err,resp) =>{
-        if (err){}
-        res.json(resp);
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
     });
 }
 
@@ -45,17 +60,31 @@ function create(req, res, next){
                                 _developmentTeam:developmentTeam});  
     project.save()
     .then((obj)=>{
-      res.json(obj);
+        res.status(200).json({
+            message: res.__('ok'),
+            error: false,
+            objs: obj
+        });
     })
     .catch((err)=>{
-      res.status(500).json({});
+        res.status(500).json({
+            message: res.__('error'),
+            error: true,
+            objs: err
+        });
     });
 }
 
 function update(req,res,next){
     let id = req.params.id;
     Project.findOne({_projectId: id},(err,obj) =>{
-        if (err){}
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }
         else{
             obj._projectName = (req.body.projectName) ? req.body.projectName : obj._projectName;
             obj._applicationDate = (req.body.applicationDate) ? req.body.applicationDate : obj._applicationDate;
@@ -67,11 +96,18 @@ function update(req,res,next){
             obj.save()
             .then(o =>{
                 res.status(200).json({
-                    errors: [],
-                    data: o
+                    message: res.__('ok'),
+                    error: false,
+                    objs: o
                 });
             })
-            .catch(err =>{});////Todo: Errors
+            .catch(err =>{
+                res.status(500).json({
+                    message: res.__('error'),
+                    error: true,
+                    objs: err
+                });
+            });
         }
     });
 }
@@ -79,10 +115,19 @@ function update(req,res,next){
 function destroy(req,res,next){
     let id = req.params.id;
     Project.findOneAndDelete({_projectId : id},(err,resp) =>{
-        res.status(200).json({
-            errors: [],
-            data: resp
-        });
+        if (err){
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
     });
 }
 
