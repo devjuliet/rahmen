@@ -39,11 +39,11 @@ function create(req, res, next){
     let feature = req.body.feature;
     let benefict = req.body.benefict;
     let context = req.body.context;
-    let events = req.body.events;
+    let results = req.body.results;
     let results = req.body.results;
 
     let card = new Card({_cardId: cardId,_backlogId:backlogId,_cardPriority:cardPriority,_cardName:cardName,_role:role,
-                                _feature:feature,_benefict:benefict,_context:context,_events:events,_results:results});  
+                                _feature:feature,_benefict:benefict,_context:context,_results:results,_results:results});  
     card.save()
     .then((obj)=>{
       res.json(obj);
@@ -64,8 +64,24 @@ function update(req,res,next){
             obj._role = (req.body.role) ? req.body.role : obj._role;
             obj._feature = (req.body.feature) ? req.body.feature : obj._feature;
             obj._benefict = (req.body.benefict) ? req.body.benefict : obj._benefict;
-            obj._events = (req.body.events) ? req.body.events : obj._events;
-            obj._results = (req.body.results) ? req.body.results : obj._results;
+            //Si es arreglo lo mas natural es pushearle al arreglo
+            if (Array.isArray(req.body.event)){
+                req.body.event.forEach(element => {
+                    obj._events.push(element);
+                });
+            }
+            //Si no es arreglo, es tratado como un numero y si de plano no viene, no pasa nada
+            else if (req.body.event){ 
+                obj._events.push(req.body.event)
+            }
+            if (Array.isArray(req.body.result)){
+                req.body.result.forEach(element => {
+                    obj._results.push(element);
+                });
+            }
+            else if (req.body.result){ 
+                obj._results.push(req.body.result)
+            }
             obj.save()
             .then(o =>{
                 res.status(200).json({

@@ -51,7 +51,7 @@ function update(req, res, next) {
         if (err) { }
         else {
             obj._teamName = req.body.teamName ? req.body.teamName : obj._teamName;
-            //Si es arreglo lo mas natural es pushearle al arreglo
+            //Si es arreglo lo mas natural es pushearle al arreglo que ya se supone debe de traer
             if (Array.isArray(req.body.project)){
                 req.body.project.forEach(element => {
                     obj._projects.push(element);
