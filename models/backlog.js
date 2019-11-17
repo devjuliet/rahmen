@@ -23,7 +23,7 @@ class Backlog{
     get backlogType() {
         return this._backlogType;
     }
-    get _endDate() {
+    get endDate() {
         return this._endDate;
     }
     set backlogId(v) {
@@ -35,7 +35,7 @@ class Backlog{
     set backlogType(v) {
         this._backlogType = v;
     }
-    set _endDate(v) {
+    set endDate(v) {
         this._endDate = v;
     }
 }
