@@ -21,7 +21,7 @@ function list(req, res, next) {
 }
 function index(req, res, next) {
     let id = req.params.id;
-    let query = Member.findOne({ _memberId: id });
+    let query = Member.findOne({ _devId: id });
     query.exec((err, resp) => {
         if (err) { }
         res.json(resp);

@@ -4,15 +4,13 @@ const Schema = mongoose.Schema;
 const schema = Schema({
     _teamId: Number,
     _teamName: String,
-    _projects: [Number],
-    _members:[Number]
+    _projects: [Number]
 });
 class Team {
     constructor(teamId,teamName,projects,members) {
         this._teamId = teamId;
         this._teamName = teamName;
         this._projects = projects;
-        this._members = members;
     }
     get teamId() {
         return this._teamId;
@@ -23,9 +21,6 @@ class Team {
     get projects() {
         return this._projects;
     }
-    get members() {
-        return this._members;
-    }
     set teamId(v) {
         this._teamId = v;
     }
@@ -35,10 +30,7 @@ class Team {
     set projects(v) {
         this._projects = v;
     }
-    set members(v) {
-        this._members = v;
-    }
 }
 schema.plugin(mongoosePaginate);
 schema.loadClass(Team);
-module.exports = mongoose.model('Member', schema);
+module.exports = mongoose.model('Team', schema);

@@ -9,6 +9,7 @@ const projectRouter = require('./routes/projects');
 const usersRouter = require('./routes/users');
 const backlogsRouter = require('./routes/backlogs');
 const membersRouter = require('./routes/members');
+const teamsRouter = require('./routes/teams');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -33,6 +34,7 @@ app.use('/backlogs', backlogsRouter);
 app.use('/members',membersRouter);
 app.use('/cards',cardRouter);
 app.use('projects',projectRouter);
+app.use('/teams',teamsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
