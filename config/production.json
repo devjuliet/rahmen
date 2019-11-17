@@ -1,0 +1,9 @@
+{
+    "secret" : {
+      "key":"36e46ae81f7457749612d4abf72fe96e"
+    },
+    "db" : {
+      "url" : "mongo"
+    }
+  }
+  

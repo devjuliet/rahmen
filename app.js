@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const expressJwt = require('express-jwt');
 const indexRouter = require('./routes/index');
 const cardRouter = require('./routes/cards');
 const projectRouter = require('./routes/projects');
@@ -11,6 +12,7 @@ const backlogsRouter = require('./routes/backlogs');
 const membersRouter = require('./routes/members');
 const teamsRouter = require('./routes/teams');
 const mongoose = require('mongoose');
+const config = require('config')
 const app = express();
 
 // view engine setup
@@ -23,10 +25,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://127.0.0.1/rahmen', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+const jwtKey = config.get("secret.key");
+
+app.use(expressJwt({secret:jwtKey})
+.unless({path: ["/login"]}));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
