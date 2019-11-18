@@ -1,8 +1,4 @@
 image: docker:stable
-before_script:
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  - eval $(ssh-agent -s)
-  - echo "$KEY" | tr -d '\r' | ssh-add - > /dev/null
 services:
   - docker:dind
 stages:
@@ -22,6 +18,9 @@ build_image:
 deploy_dev:
   stage: deploy
   script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$KEY" | tr -d '\r' | ssh-add - > /dev/null
     - ssh -p22 $SERVER
     - docker stop rahmen
     - docker rm rahmen
