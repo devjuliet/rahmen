@@ -1,9 +1,12 @@
 image: docker:stable
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$KEY" | tr -d '\r' | ssh-add - > /dev/null
 services:
   - docker:dind
 stages:
   - build
-  - deploy
 build_image:
   stage: build
   variables:
@@ -16,10 +19,10 @@ build_image:
   only:
     - master
 
-deploy_dev:
+deploy:
   stage: deploy
   script:
-    - ssh -p22 $SERVER -i $KEY
+    - ssh -p22 $SERVER
     - docker stop rahmen
     - docker rm rahmen
     - docker run -dti --network rahmen_net --name rahmen $IMAGE_TAG
