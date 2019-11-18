@@ -14,3 +14,13 @@ build_image:
     - docker push $IMAGE_TAG
   only:
     - master
+
+deploy:dev:
+  stage: deploy
+  script:
+    - ssh -p22 $SERVER -i $KEY
+    - docker stop rahmen
+    - docker rm rahmen
+    - docker run -dti --network rahmen_net --name rahmen $IMAGE_TAG
+  only:
+    - master
