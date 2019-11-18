@@ -1,0 +1,7 @@
+{
+    "ok":"data is ok! :)",
+    "error": "data is not ok ",
+    "user.save":"User saved correctly!",
+    "user.error": "Couldn't save user :("
+  }
+  
