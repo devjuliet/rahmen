@@ -43,12 +43,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(i18n.init);
-/*
+
 const jwtKey = config.get("secret.key");
 
 app.use(expressJwt({secret:jwtKey})
 .unless({path: ["/login"]}));
-*/
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
