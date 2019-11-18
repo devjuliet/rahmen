@@ -22,9 +22,9 @@ deploy_dev:
      - apk add openssh
      - mkdir -p ~/.ssh  
      - echo -e "$KEY" > ~/.ssh/cris.pem     
-     - chmod 400 ~/.ssh/cris.pem 
+     - chmod 600 ~/.ssh/cris.pem 
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
   script:
-    - ssh -i "/.ssh/cris.pem" $SERVER < deploy.sh
+    - ssh -T -i /.ssh/cris.pem $SERVER < deploy.sh
   only:
     - master
