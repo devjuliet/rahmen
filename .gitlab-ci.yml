@@ -3,6 +3,7 @@ services:
   - docker:dind
 stages:
   - build
+  - deploy
 build_image:
   stage: build
   variables:
@@ -15,7 +16,7 @@ build_image:
   only:
     - master
 
-deploy:dev:
+deploy_dev:
   stage: deploy
   script:
     - ssh -p22 $SERVER -i $KEY
