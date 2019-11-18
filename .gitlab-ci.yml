@@ -20,9 +20,8 @@ deploy_dev:
   stage: deploy
   before_script: 
      - apk add openssh
-     - mkdir -p ~/.ssh     
-     - echo -e "$KEY" > ~/.ssh/id_rsa     
-     - chmod 600 ~/.ssh/id_rsa 
+     - eval $(ssh-agent -s)
+     - echo "$KEY" | tr -d '\r' | ssh-add - > /dev/null
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
   script:
     - ssh -p22 $SERVER < deploy.sh
