@@ -1,6 +1,4 @@
 image: docker:stable
-variables:
- - All or variables
 services:
   - docker:dind
 stages:
