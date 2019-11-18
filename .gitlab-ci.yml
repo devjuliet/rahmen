@@ -3,6 +3,7 @@ services:
   - docker:dind
 stages:
   - build
+  - deploy
 build_image:
   stage: build
   variables:
