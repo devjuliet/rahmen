@@ -1,6 +1,6 @@
 {
     "ok":"información correcta",
-    "err": "informacion no correcta",
+    "error": "informacion no correcta",
     "user.save":"Usuario guardado correctamente",
     "user.error": "No se pudo guardar el usuario"
   }

@@ -10,7 +10,7 @@ function list(req, res, next) {
 
     Team.paginate({}, options)
         .then(team => {
-            res.json({
+            res.status(200).json({
                 message: res.__('ok'),
                 error: false,
                 objs: team

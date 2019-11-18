@@ -10,14 +10,14 @@ function list(req, res, next) {
     Backlog.paginate({}, options)
         .then(backlogs => {
             res.status(200).json({
-                message: res.___('ok'),
+                message: res.__('ok'),
                 error: false,
                 objs: backlogs 
             });
         })
         .catch((error) => {
             res.status(500).json({
-                message: res.___('error'),
+                message: res.__('error'),
                 error: true,
                 objs: error
             });

@@ -8,17 +8,8 @@ const app = require('../app');
 const debug = require('debug')('rahmen:server');
 const http = require('http');
 const config = require('config');
-const mongoose = require('mongoose');
-/**
- * Get port from environment and store in Express.
- */
-const uri = `mongodb://${config.get('db.url')}:27017/rahmen`;
 
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-const db = mongoose.connection;
+
 
 
 const port = normalizePort(process.env.PORT || '3000');

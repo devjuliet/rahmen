@@ -15,9 +15,20 @@ const config = require('config')
 const i18n = require('i18n');
 
 const app = express();
+const mongoose = require('mongoose');
+/**
+ * Get port from environment and store in Express.
+ */
+const uri = `mongodb://${config.get('db.url')}:27017/rahmen`;
+
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 i18n.configure({
   locales:['en', 'es'],
+  defaultLocale: 'en',
   cookie: 'language',
   directory: __dirname + '/locales'
 });
