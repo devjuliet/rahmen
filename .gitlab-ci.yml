@@ -20,8 +20,9 @@ deploy_dev:
   stage: deploy
   before_script: 
      - apk add openssh
-     - eval $(ssh-agent -s)
-     - echo "$KEY" | tr -d '\r' | ssh-add - > /dev/null
+     - mkdir -p ~/.ssh  
+     - echo -e "$KEY" > ~/.ssh/cris.pem     
+     - chmod 400 ~/.ssh/cris.pem 
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
   script:
     - ssh -p22 $SERVER < deploy.sh
