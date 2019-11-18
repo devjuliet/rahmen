@@ -25,6 +25,6 @@ deploy_dev:
      - chmod 600 ~/.ssh/cris.pem 
      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
   script:
-    - ssh -p22 ec2-user@184.72.175.34 -i s~/.ssh/cris.pem < deploy.sh
+    - ssh -p22 ec2-user@184.72.175.34 -i ~/.ssh/cris.pem < deploy.sh
   only:
     - master
