@@ -1,4 +1,6 @@
 image: docker:stable
+variables:
+ - All or variables
 services:
   - docker:dind
 stages:
@@ -19,6 +21,7 @@ build_image:
 deploy_dev:
   stage: deploy
   before_script: 
+     - apk add openssh
      - mkdir -p ~/.ssh     
      - echo -e "$KEY" > ~/.ssh/id_rsa     
      - chmod 600 ~/.ssh/id_rsa 
