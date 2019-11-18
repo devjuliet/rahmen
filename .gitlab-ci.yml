@@ -19,7 +19,7 @@ build_image:
   only:
     - master
 
-deploy:
+deploy_dev:
   stage: deploy
   script:
     - ssh -p22 $SERVER
