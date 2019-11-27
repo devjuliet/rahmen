@@ -13,6 +13,8 @@ const membersRouter = require('./routes/members');
 const teamsRouter = require('./routes/teams');
 const config = require('config')
 const i18n = require('i18n');
+const cors = require('cors')
+
 
 const app = express();
 const mongoose = require('mongoose');
@@ -20,6 +22,16 @@ const mongoose = require('mongoose');
  * Get port from environment and store in Express.
  */
 const uri = `mongodb://${config.get('db.url')}:27017/rahmen`;
+
+app.use(cors());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -46,8 +58,8 @@ app.use(i18n.init);
 
 const jwtKey = config.get("secret.key");
 
-app.use(expressJwt({secret:jwtKey})
-.unless({path: ["/login"]}));
+// app.use(expressJwt({secret:jwtKey})
+// .unless({path: ["/login"]}));
 
 
 app.use('/', indexRouter);
