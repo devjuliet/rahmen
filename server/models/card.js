@@ -3,34 +3,36 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 const schema = Schema({
     _cardId: Number,
-    _backlogId:Number,
+    _sprintId:Number,
     _cardPriority: Number,
     _cardName: String,
     _role: String,
     _feature: String,
     _benefict: String,
     _context: String,
+    _status: String,
     _events: [String],
     _results: [String]
 });
 class Card{
-    constructor(cardId,backlogId,cardPriority,cardName,role,feature,benefict,context,events,results) {
+    constructor(cardId,sprintId,cardPriority,cardName,role,feature,benefict,context,status,events,results) {
         this._cardId = cardId;
-        this._backlogId = backlogId;
+        this._sprintId = sprintId;
         this._cardPriority = cardPriority;
         this._cardName = cardName;
         this._role = role;
         this._feature = feature;
         this._benefict = benefict;
         this._context = context;
+        this._status = status;
         this._events = events;
         this._retults = results;
     }
     get cardId() {
         return this._cardId;
     }
-    get backlogId() {
-        return this._backlogId;
+    get sprintId() {
+        return this._sprintId;
     }
     get cardPriority() {
         return this._cardPriority;
@@ -50,6 +52,9 @@ class Card{
     get context() {
         return this._context;
     }
+    get status() {
+        return this._status;
+    }
     get events() {
         return this._events;
     }
@@ -59,8 +64,8 @@ class Card{
     set cardId(v) {
         this._cardId = v;
     }
-    set backlogId(v) {
-        this._backlogId = v;
+    set sprintId(v) {
+        this._sprintId = v;
     }
     set cardPriority(v) {
         this._cardPriority = v;
@@ -79,6 +84,9 @@ class Card{
     }
     set context(v) {
         this._context = v;
+    }
+    set status(v) {
+        this._status = v;
     }
     set events(v) {
         this._events = v;

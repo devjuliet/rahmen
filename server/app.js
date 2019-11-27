@@ -8,7 +8,7 @@ const indexRouter = require('./routes/index');
 const cardRouter = require('./routes/cards');
 const projectRouter = require('./routes/projects');
 const usersRouter = require('./routes/users');
-const backlogsRouter = require('./routes/backlogs');
+const sprintsRouter = require('./routes/sprints');
 const membersRouter = require('./routes/members');
 const teamsRouter = require('./routes/teams');
 const config = require('config')
@@ -64,7 +64,7 @@ const jwtKey = config.get("secret.key");
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/backlogs', backlogsRouter);
+app.use('/sprints', sprintsRouter);
 app.use('/members',membersRouter);
 app.use('/cards',cardRouter);
 app.use('/projects',projectRouter);

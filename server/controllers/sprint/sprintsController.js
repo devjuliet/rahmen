@@ -1,7 +1,7 @@
 const express = require('express');
-const Backlog = require('../../models/backlog');
+const Sprint = require('../../models/sprint');
 function list(req, res, next) {
-    let query = Backlog.find({});
+    let query = Sprint.find({});
     query.exec((err,resp) =>{
         if (err){
             res.status(500).json({
@@ -19,7 +19,7 @@ function list(req, res, next) {
 }
 function index(req, res, next){
     let id = req.params.id;
-    let query = Backlog.findOne({_backlogId: id});
+    let query = Sprint.findOne({_sprintId: id});
     query.exec((err,resp) =>{
         if (err){
             res.status(500).json({
@@ -36,12 +36,19 @@ function index(req, res, next){
     });
 }
 function create(req, res, next){
-    let backlogId = req.body.backlogId;
+    let sprintId = req.body.sprintId;
     let projectId = req.body.projectId;
     let backlogType = req.body.backlogType;
+    let retrospective = {};
     let endDate = req.body.endDate;
-    let backlog = new Backlog({_backlogId : backlogId,_projectId: projectId,_backlogType: backlogType,_endDate: endDate});  
-    backlog.save()
+    let sprint = new Sprint({
+        _sprintId : sprintId,
+        _projectId: projectId,
+        _backlogType: backlogType,
+        _retrospective: retrospective,
+        _endDate: endDate
+    });  
+    sprint.save()
     .then((obj)=>{
       res.status(200).json({
           error: false,
@@ -59,11 +66,18 @@ function create(req, res, next){
 }
 function update(req,res,next){
     let id = req.params.id;
-    Backlog.findOne({_backlogId: id},(err,obj) =>{
+    Sprint.findOne({_sprintId: id},(err,obj) =>{
         if (err){}
         else{
             obj._backlogType = (req.body.backlogType) ? req.body.backlogType : obj._backlogType;
             obj._endDate = (req.body.endDate) ? req.body.endDate : obj._endDate;
+            if (req.body.what_went_well && req.body.what_could_be_improved && req.body.commit_to_improve){
+                obj._retrospective = {
+                    _what_went_well : req.body.what_went_well,
+                    _what_could_be_improved: req.body.what_could_be_improved,
+                    _commit_to_improve: req.body.commit_to_improve
+                }
+            }
             obj.save()
             .then(o =>{
                 res.status(200).json({
@@ -85,7 +99,7 @@ function update(req,res,next){
 
 function destroy(req,res,next){
     let id = req.params.id;
-    Backlog.findOneAndDelete({_backlogId : id},(err,resp) =>{
+    Sprint.findOneAndDelete({_backlogId : id},(err,resp) =>{
         if (err){
             res.status(500).json({
                 message: res.__('error'),
