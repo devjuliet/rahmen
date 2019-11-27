@@ -2,27 +2,21 @@ const express = require('express');
 const Team = require('../../models/team');
 const n = 2;
 function list(req, res, next) {
-    let page = req.params.page ? req.params.page : 1;
-    const options = {
-        page: page,
-        limit: n
-    };
-
-    Team.paginate({}, options)
-        .then(team => {
-            res.status(200).json({
-                message: res.__('ok'),
-                error: false,
-                objs: team
-            });
-        })
-        .catch((err) => {
+    let query = Team.find({});
+    query.exec((err, resp) => {
+        if (err) { 
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
+        }
+        res.status(200).json({
+            message: res.__('ok'),
+            error:false,
+            objs: resp
         });
+    });
 }
 function index(req, res, next) {
     let id = req.params.id;

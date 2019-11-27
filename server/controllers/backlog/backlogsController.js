@@ -1,27 +1,21 @@
 const express = require('express');
 const Backlog = require('../../models/backlog');
 function list(req, res, next) {
-    let page = req.params.page ? req.params.page : 1;
-    const options = {
-        page: page,
-        limit: 2
-    };
-
-    Backlog.paginate({}, options)
-        .then(backlogs => {
-            res.status(200).json({
-                message: res.__('ok'),
-                error: false,
-                objs: backlogs 
-            });
-        })
-        .catch((error) => {
+    let query = Backlog.find({});
+    query.exec((err,resp) =>{
+        if (err){
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: error
             });
+        }
+        res.status(200).json({
+            message: res.__('ok'),
+            error:false,
+            objs: resp
         });
+    });
 }
 function index(req, res, next){
     let id = req.params.id;

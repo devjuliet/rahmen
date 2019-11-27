@@ -2,27 +2,22 @@ const express = require('express');
 const Project = require('../../models/project');
 
 function list(req, res, next) {
-    let page = req.params.page ? req.params.page : 1;
-    const options = {
-        page: page,
-        limit: 2
-    };
-
-    Project.paginate({}, options)
-        .then(projects => {
-            res.json({
-                message: res.__('ok'),
-                error: false,
-                objs: projects 
-            });
-        })
-        .catch((err) => {
+    let query = Project.find({});
+    query.exec((err,resp) =>{
+        if (err){
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
-        });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
+    });
 }
 
 function index(req, res, next){

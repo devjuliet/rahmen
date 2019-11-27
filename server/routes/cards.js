@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/card/cardsController');
 
 // /cards
-router.get('/:page?', controller.list);
+router.get('/', controller.list);
 router.get('/index/:id', controller.index);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

@@ -2,27 +2,21 @@ const express = require('express');
 const Card = require('../../models/card');
 
 function list(req, res, next) {
-    let page = req.params.page ? req.params.page : 1;
-    const options = {
-        page: page,
-        limit: 2
-    };
-
-    Card.paginate({}, options)
-        .then(cards => {
-            res.json({
-                message: res.__('ok'),
-                error: false,
-                objs: cards 
-            });
-        })
-        .catch((err) => {
+    let query = Card.find({});
+    query.exec((err,resp) =>{
+        if (err){
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
+        }
+        res.status(200).json({
+            message: res.__('ok'),
+            error:false,
+            data: resp
         });
+    });
 }
 
 function index(req, res, next){

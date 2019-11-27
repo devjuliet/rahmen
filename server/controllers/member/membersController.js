@@ -1,27 +1,22 @@
 const express = require('express');
 const Member = require('../../models/member');
 function list(req, res, next) {
-    let page = req.params.page ? req.params.page : 1;
-    const options = {
-        page: page,
-        limit: 1000
-    };
-
-    Member.paginate({}, options)
-        .then(member => {
-            res.status(200).json({
-                message: res.__('ok'),
-                error: false,
-                objs: member
-            });
-        })
-        .catch((err) => {
+    let query = Member.find({});
+    query.exec((err, resp) => {
+        if (err) { 
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
-        });
+        }else{
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: resp
+            });
+        }
+    });
 }
 function index(req, res, next) {
     let id = req.params.id;
