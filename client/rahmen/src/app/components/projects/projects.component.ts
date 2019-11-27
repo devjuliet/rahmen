@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { MemberService } from 'src/app/services/member.service';
+import { TeamServie } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,7 +11,8 @@ import { MemberService } from 'src/app/services/member.service';
 export class ProjectsComponent implements OnInit {
 
   
-  constructor(private projectService: ProjectService, private memberService:MemberService) { }
+  constructor(private projectService: ProjectService, private memberService:MemberService,
+    private teamService: TeamServie) { }
   
   ngOnInit() {
    this.getProjects(1);
@@ -25,6 +27,9 @@ export class ProjectsComponent implements OnInit {
         }); 
         this.memberService.getMember(element['_projectManager']).subscribe( data => {
           element['_projectManager'] = data['objs']['_devName'];
+        });
+        this.teamService.getTeam(element['_developmentTeam']).subscribe(data => {
+          element['_developmentTeam'] = data['objs']['_teamName'];
         }); 
       });
      });

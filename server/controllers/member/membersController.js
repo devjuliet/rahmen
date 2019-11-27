@@ -4,7 +4,7 @@ function list(req, res, next) {
     let page = req.params.page ? req.params.page : 1;
     const options = {
         page: page,
-        limit: 2
+        limit: 1000
     };
 
     Member.paginate({}, options)

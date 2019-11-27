@@ -6,16 +6,16 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class MemberService {
-  url = environment.baseUrl + '/members';
-  members : Object[]
+export class TeamServie {
+  url = environment.baseUrl + '/teams';
+  teams : Object[]
   constructor(private http: HttpClient) { }
 
-  getMember(id:number){
+  getTeam(id:number){
     return this.http.get(this.url + `/index/${id}`);
   }
 
-  getMembers(){
-    return this.http.get(this.url);
+  getTeams(id:number){
+    return this.http.get(this.url + `/${id}`);
   }
 }

@@ -11,9 +11,11 @@ export class ProjectService {
   projects : Object[]
   constructor(private http: HttpClient) { }
 
-  getProjects(id:number){
-    
+  getProjects(id:number){    
     return this.http.get(this.url + `/${id}`);
-     
+  }
+
+  getProject(id:number){    
+    return this.http.get(this.url + `/index/${id}`);
   }
 }

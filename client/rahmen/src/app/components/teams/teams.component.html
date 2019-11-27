@@ -12,28 +12,26 @@
         <h1>Teams</h1>
         <hr>
 
-        <div class="row">
+        <div *ngFor="let team of teamService.teams; let i = index" class="row">
           <div class="col-lg-6">
             <div class="card mb-3">
               <div class="card-header">
                 <i class="fas fa-users"></i>
-                Pacman Team
+                {{team._teamName}}
               </div>
 
               <div class="card-body">
                 <dl class="row">
                   <dt class="col-sm-3">Recent Projects</dt>
                   <div class="col-sm-9">
-                    <li>Project 1</li>
-                    <li>Project 2</li>
-                    <li>Project 3</li>
-                    <li>Project 4</li>
+                    <ul *ngFor="let project of team._projects">
+                        <li>{{project}}</li>
+                    </ul>
                   </div>
                 </dl>
               </div>
               <div class="card-footer small text-muted">
-                <!-- TODO Mandar el Id que debe ser -->
-                <button routerLink="1" class="align-self-end btn btn-lg btn-block btn btn-primary btn-sm" role="button" aria-pressed="true">Open Team</button>
+                <button routerLink={{i+1}} class="align-self-end btn btn-lg btn-block btn btn-primary btn-sm" role="button" aria-pressed="true">Open Team</button>
                 
               </div>
 

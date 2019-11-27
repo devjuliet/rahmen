@@ -12,41 +12,44 @@
     <h1>Projects</h1>
     <hr>
 
-    <div *ngFor="let project of projectService.projects" class="row">
-        <div class="col-lg-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-chart-line"></i>
-                    {{project._projectName}}
+    <div >
+        <div *ngFor="let project of projectService.projects" >
+            <div class="col-lg-6 ">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        {{project._projectName}}
+                    </div>
+
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">Description</dt>
+                            <dd class="col-sm-9">{{project._projectDescription}}</dd>
+
+                            <dt class="col-sm-3">Scrum Master</dt>
+                            <dd class="col-sm-9">{{project._projectManager}}</dd>
+
+                            <dt class="col-sm-3">Product Owner</dt>
+                            <dd class="col-sm-9">{{project._productOwner}}</dd>
+
+                            <dt class="col-sm-3">Developer Team</dt>
+                            <dd class="col-sm-9">{{project._developmentTeam}}</dd>
+
+                        </dl>
+                    </div>
+                    <div class="card-footer small text-muted">
+                        <!-- TODO: Colocar correctamente el id en el router link  -->
+                        <button routerLink="1" class="align-self-end btn btn-lg btn-block btn btn-primary btn-sm"
+                            role="button" aria-pressed="true">Open Project</button>
+                        <br>
+                        <p class="text-center">Application date: {{project._applicationDate}} <br>Start date:
+                            {{project._startDate}}</p>
+                    </div>
+
                 </div>
-
-                <div class="card-body">
-                    <dl class="row">
-                        <dt class="col-sm-3">Description</dt>
-                        <dd class="col-sm-9">{{project._projectDescription}}</dd>
-
-                        <dt class="col-sm-3">Scrum Master</dt>
-                        <dd class="col-sm-9">{{project._projectManager}}</dd>
-
-                        <dt class="col-sm-3">Product Owner</dt>
-                        <dd class="col-sm-9">{{project._productOwner}}</dd>
-
-                        <dt class="col-sm-3">Developer Team</dt>
-                        <dd class="col-sm-9">{{project._developmentTeam}}</dd>
-
-                    </dl>
-                </div>
-                <div class="card-footer small text-muted">
-                    <!-- TODO: Colocar correctamente el id en el router link  -->
-                    <button routerLink="1" class="align-self-end btn btn-lg btn-block btn btn-primary btn-sm"
-                        role="button" aria-pressed="true">Open Project</button>
-                    <br>
-                    <p class="text-center">Application date: {{project._applicationDate}}br>Start date: {{project_startDate}}</p>
-                </div>
-
             </div>
+
         </div>
-        
     </div>
 
 </div>

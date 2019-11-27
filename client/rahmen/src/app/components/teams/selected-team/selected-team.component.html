@@ -1,54 +1,49 @@
 <div class="container-fluid">
 
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
             <a href="index.html">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">
-              <a href="teams.html">Teams</a>
-          </li>
-          <li class="breadcrumb-item">Pacman Team</li>
-        </ol>        
-        <!-- Page Content -->
-        <h1>Pacman Team</h1>
-        <hr>
-        <div class="container-fluid">
-            <table class="table table-responsive">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th>Member</th>
-                        <th>Date of birth</th>
-                        <th>CURP</th>
-                        <th>RFC</th>
-                        <th>Address</th>
-                        <th>Skills</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Member 1</td>
-                            <td>01/01/2000</td>
-                            <td>xxxxxxxxxxxxxxxxxxx</td>
-                            <td>xxxxxxxxxxxxxxx</td>
-                            <td>Random address</td>
-                            <td>
-                                <li>Java Master</li>
-                                <li>Javascript Junior</li>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Member 1</td>
-                            <td>01/01/2006</td>
-                            <td>xxxxxxxxxxxxxxxxxxx</td>
-                            <td>xxxxxxxxxxxxxxx</td>
-                            <td>Random address</td>
-                            <td>
-                                <li>Javascript Master</li>
-                            </td>
-                        </tr>
-                    </tbody>
-            </table>
-        </div>
+        </li>
+        <li class="breadcrumb-item active">
+            <a href="teams.html">Teams</a>
+        </li>
+        <li class="breadcrumb-item">Pacman Team</li>
+    </ol>
+    <!-- Page Content -->
+    <h1>Pacman Team</h1>
+    <hr>
+    <div class="container-fluid">
+        <table class="table table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Member ID</th>
+                    <th>Name</th>
+                    <th>Date of birth</th>
+                    <th>CURP</th>
+                    <th>RFC</th>
+                    <th>Address</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of memberService.members">
+                    <td>{{member._devId}}</td>
+                    <td>{{member._devName}}</td>
+                    <td>{{member._devBirthDate}}</td>
+                    <td>{{member._devCurp}}</td>
+                    <td>{{member._devRfc}}</td>
+                    <td>{{member._devAddress}}</td>
+                    <td>
+                        <ul *ngFor="let skill of member._devSkills">
+                            <li>{{skill['_language']}} {{skill['_rank']}}</li>                            
+                        </ul>
+                        
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
 
-      </div>
+</div>
