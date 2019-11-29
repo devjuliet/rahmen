@@ -1,0 +1,99 @@
+<div>
+    <div class="container-fluid h-75">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="projects.html">Projects</a>
+            </li>
+            <li class="breadcrumb-item"><a href="project-page.html">Wendy's</a></li>
+            <li class="breadcrumb-item active">Sprint 1</li>
+        </ol>
+
+        <!-- Page Content-->
+        <div class="d-flex justify-content-between ">
+            <h1>Wendy's</h1>
+            <div class="h-50">
+                <a class="btn btn-primary mx-2" href="release.html" role="button">Create Retrospective</a>
+                <a class="btn btn-primary" href="burndown-chart.html" role="button">Burndown Chart</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- <div id="board"> -->
+        <div class="row mb-3 h-100">
+
+            <div id="to-do-column" class="col-md bg-light mx-2 p-3 list"
+            cdkDropList
+            #todoList= "cdkDropList"
+            [cdkDropListData] = "toDo"
+            [cdkDropListConnectedTo] = "[progressList, doneList]"
+            (cdkDropListDropped) = "onDropEvent($event)">
+                <h3>To-do</h3>
+                <div class="card mb-3 box" *ngFor="let card of toDo" cdkDrag>
+                    <div class="card-header bg-primary text-white">
+                        {{card.issue}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{card.title}}</h5>
+                        <p class="card-text">{{card.desc}}</p>
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                            data-target="#card2897">
+                            See more</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="in-progress-column" class="col-md bg-light mx-2 p-3 list"
+            cdkDropList
+            #progressList= "cdkDropList"
+            [cdkDropListData] = "doing"
+            [cdkDropListConnectedTo] = "[todoList, doneList]"
+            (cdkDropListDropped) = "onDropEvent($event)">
+                <h3>In progress</h3>
+                <div class="card mb-3 box" *ngFor="let card of doing" cdkDrag>
+                    <div class="card-header bg-primary text-white">
+                        {{card.issue}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{card.title}}</h5>
+                        <p class="card-text">{{card.desc}}</p>
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                            data-target="#card2897">
+                            See more</button>
+                    </div>
+                </div>
+            </div>
+            <div id="done-column" class="col-md bg-light mx-2 p-3 list"
+            cdkDropList
+            #doneList= "cdkDropList"
+            [cdkDropListData] = "done"
+            [cdkDropListConnectedTo] = "[todoList, progressList]"
+            (cdkDropListDropped) = "onDropEvent($event)">
+                <h3>Done</h3>
+                <div class="card mb-3 box" *ngFor="let card of done" cdkDrag>
+                    <div class="card-header bg-primary text-white">
+                        {{card.issue}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{card.title}}</h5>
+                        <p class="card-text">{{card.desc}}</p>
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                            data-target="#card2897">
+                            See more</button>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+
+
+
+    </div>
+</div>

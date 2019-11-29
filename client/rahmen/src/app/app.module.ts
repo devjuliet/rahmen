@@ -9,6 +9,10 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { TeamsComponent } from './components/teams/teams.component';
 import { SelectedTeamComponent } from './components/teams/selected-team/selected-team.component';
 import { SelectedProjectComponent } from './components/projects/selected-project/selected-project.component';
+import { SelectedSprintComponent } from './components/projects/selected-project/selected-sprint/selected-sprint.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,17 @@ import { SelectedProjectComponent } from './components/projects/selected-project
     ProjectsComponent,
     TeamsComponent,
     SelectedTeamComponent,
-    SelectedProjectComponent
+    SelectedProjectComponent,
+    SelectedSprintComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

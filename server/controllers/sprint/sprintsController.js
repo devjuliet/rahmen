@@ -39,7 +39,9 @@ function create(req, res, next){
     let sprintId = req.body.sprintId;
     let projectId = req.body.projectId;
     let backlogType = req.body.backlogType;
-    let retrospective = {};
+    let retrospective = {_what_went_well : "",
+    _what_could_be_improved: "",
+    _commit_to_improve: ""}
     let endDate = req.body.endDate;
     let sprint = new Sprint({
         _sprintId : sprintId,

@@ -21,7 +21,7 @@ export class SelectedTeamComponent implements OnInit {
 
   getMembers(){
     this.memberService.getMembers().subscribe(data => {
-      data['objs']['docs'].forEach(element => {
+      data['objs'].forEach(element => {
         if(element['_devTeam'] == this.teamId){
           this.memberService.members.push(element);
         } 

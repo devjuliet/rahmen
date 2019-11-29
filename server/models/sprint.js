@@ -14,7 +14,7 @@ const schema = Schema({
     _endDate: Date
 });
 class Sprint{
-    constructor(sprintId,projectId,backlogType,retrospective,endDate) {
+    constructor(sprintId,projectId,backlogType,retrospective ,endDate) {
         this._sprintId = sprintId;
         this._projectId = projectId;
         this._backlogType = backlogType;

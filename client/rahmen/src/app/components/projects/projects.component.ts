@@ -15,12 +15,13 @@ export class ProjectsComponent implements OnInit {
     private teamService: TeamServie) { }
   
   ngOnInit() {
-   this.getProjects(1);
+   this.getProjects();
   }
 
-  getProjects(id:number){
-    this.projectService.getProjects(id).subscribe(data => {
-      this.projectService.projects = data['objs']['docs'];
+  getProjects(){
+    this.projectService.getProjects().subscribe(data => {
+      this.projectService.projects = data['objs'];
+      
       this.projectService.projects.forEach(element => {
         this.memberService.getMember(element['_productOwner']).subscribe( data => {
           element['_productOwner'] = data['objs']['_devName'];

@@ -17,8 +17,8 @@ export class TeamsComponent implements OnInit {
   }
 
   getTeams(){
-    this.teamService.getTeams(1).subscribe(data =>{
-      this.teamService.teams = data['objs']['docs'];
+    this.teamService.getTeams().subscribe(data =>{
+      this.teamService.teams = data['objs'];
       this.teamService.teams.forEach(element => {
         element['_projects'].forEach(proj => {
           this.projectService.getProject(proj).subscribe(data => {

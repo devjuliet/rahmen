@@ -15,7 +15,7 @@ export class TeamServie {
     return this.http.get(this.url + `/index/${id}`);
   }
 
-  getTeams(id:number){
-    return this.http.get(this.url + `/${id}`);
+  getTeams(){
+    return this.http.get(this.url);
   }
 }
