@@ -39,6 +39,7 @@ function index(req, res, next){
 }
 
 function create(req, res, next){
+
     let cardId = req.body.cardId;
     let sprintId = req.body.sprintId;
     let projectId = req.body.projectId;
@@ -48,6 +49,8 @@ function create(req, res, next){
     let feature = req.body.feature;
     let benefict = req.body.benefict;
     let context = req.body.context;
+    let status = req.body.status;
+    let events = req.body.events;
     let results = req.body.results;
 
     let card = new Card({
@@ -58,7 +61,9 @@ function create(req, res, next){
         _cardName:cardName,
         _role:role,
         _feature:feature,
-        sprint_benefict:benefict,
+        _benefict:benefict,
+        _status: status,
+        _events: events,
         _context:context,
         _results:results
     });  
@@ -90,6 +95,8 @@ function update(req,res,next){
             obj._role = (req.body.role) ? req.body.role : obj._role;
             obj._feature = (req.body.feature) ? req.body.feature : obj._feature;
             obj._benefict = (req.body.benefict) ? req.body.benefict : obj._benefict;
+            obj._context = (req.body.context) ? req.body.context : obj._context;
+            obj._status = (req.body.status) ? req.body.status : obj._status;
             //Si es arreglo lo mas natural es pushearle al arreglo
             if (Array.isArray(req.body.event)){
                 req.body.event.forEach(element => {
