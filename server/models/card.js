@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const schema = Schema({
     _cardId: Number,
     _sprintId:Number,
+    _projectId:Number,
     _cardPriority: Number,
     _cardName: String,
     _role: String,
@@ -15,9 +16,10 @@ const schema = Schema({
     _results: [String]
 });
 class Card{
-    constructor(cardId,sprintId,cardPriority,cardName,role,feature,benefict,context,status,events,results) {
+    constructor(cardId,sprintId,projectId,cardPriority,cardName,role,feature,benefict,context,status,events,results) {
         this._cardId = cardId;
         this._sprintId = sprintId;
+        this._projectId = projectId;
         this._cardPriority = cardPriority;
         this._cardName = cardName;
         this._role = role;
@@ -32,6 +34,9 @@ class Card{
         return this._cardId;
     }
     get sprintId() {
+        return this._sprintId;
+    }
+    get projectId() {
         return this._sprintId;
     }
     get cardPriority() {
@@ -66,6 +71,9 @@ class Card{
     }
     set sprintId(v) {
         this._sprintId = v;
+    }
+    set projectId(v) {
+        this._projectId = v;
     }
     set cardPriority(v) {
         this._cardPriority = v;

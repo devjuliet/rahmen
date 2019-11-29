@@ -40,7 +40,8 @@ function index(req, res, next){
 
 function create(req, res, next){
     let cardId = req.body.cardId;
-    let backlogId = req.body.backlogId;
+    let sprintId = req.body.sprintId;
+    let projectId = req.body.projectId;
     let cardPriority = req.body.cardPriority;
     let cardName = req.body.cardName;
     let role = req.body.role;
@@ -49,8 +50,18 @@ function create(req, res, next){
     let context = req.body.context;
     let results = req.body.results;
 
-    let card = new Card({_cardId: cardId,_backlogId:backlogId,_cardPriority:cardPriority,_cardName:cardName,_role:role,
-                                _feature:feature,_benefict:benefict,_context:context,_results:results});  
+    let card = new Card({
+        _cardId: cardId,
+        _sprintId:sprintId,
+        _projectId:projectId,
+        _cardPriority:cardPriority,
+        _cardName:cardName,
+        _role:role,
+        _feature:feature,
+        sprint_benefict:benefict,
+        _context:context,
+        _results:results
+    });  
     card.save()
     .then((obj)=>{
         res.status(200).json({
@@ -73,7 +84,7 @@ function update(req,res,next){
     Card.findOne({_cardId: id},(err,obj) =>{
         if (err){}
         else{
-            obj._backlogId = (req.body.backlogId) ? req.body.backlogId : obj._backlogId;
+            obj._sprintId = (req.body.sprintId) ? req.body.sprintId : obj._sprintId;
             obj._cardPriority = (req.body.cardPriority) ? req.body.cardPriority : obj._cardPriority;
             obj._cardName = (req.body.cardName) ? req.body.cardName : obj._cardName;
             obj._role = (req.body.role) ? req.body.role : obj._role;
