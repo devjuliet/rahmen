@@ -1,0 +1,18 @@
+image: docker:stable
+services:
+  - docker:dind
+stages:
+  - build_server
+build_image:
+  stage: build
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE/server
+    SERVER_TAG: $IMAGE:$CI_COMMIT_SHORT_SHA
+    DOCKER_HOST: tcp://docker:2375
+  script:
+    - cd ~/server
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --pull -t $SERVER_TAG -f dockerfile .
+    - docker push $SERVER_TAG
+  only:
+    - master
