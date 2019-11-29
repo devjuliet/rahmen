@@ -6,7 +6,7 @@ stages:
 build_image:
   stage: build_server
   variables:
-    IMAGE: registry.gitlab.com/accjuliet/rahmen
+    IMAGE: registry.gitlab.com/accjuliet/rahmen/server
     SERVER_TAG: $IMAGE:$CI_COMMIT_SHORT_SHA
     DOCKER_HOST: tcp://docker:2375
   script:
