@@ -3,14 +3,14 @@ const Project = require('../../models/project');
 
 function list(req, res, next) {
     let query = Project.find({});
-    query.exec((err,resp) =>{
-        if (err){
+    query.exec((err, resp) => {
+        if (err) {
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
-        }else{
+        } else {
             res.status(200).json({
                 message: res.__('ok'),
                 error: false,
@@ -20,17 +20,17 @@ function list(req, res, next) {
     });
 }
 
-function index(req, res, next){
+function index(req, res, next) {
     let id = req.params.id;
-    let query = Project.findOne({_projectId: id});
-    query.exec((err,resp) =>{
-        if (err){
+    let query = Project.findOne({ _projectId: id });
+    query.exec((err, resp) => {
+        if (err) {
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
-        }else{
+        } else {
             res.status(200).json({
                 message: res.__('ok'),
                 error: false,
@@ -40,9 +40,10 @@ function index(req, res, next){
     });
 }
 
-function create(req, res, next){
+function create(req, res, next) {
     let projectId = req.body.projectId;
     let projectName = req.body.projectName;
+    let projectStatus = req.body.projectStatus;
     let applicationDate = req.body.applicationDate;
     let startDate = req.body.startDate;
     let projectDescription = req.body.projectDescription;
@@ -50,38 +51,41 @@ function create(req, res, next){
     let productOwner = req.body.productOwner;
     let developmentTeam = req.body.developmentTeam;
 
-    let project = new Project({_projectId: projectId,_projectName: projectName,_applicationDate: applicationDate, _startDate:startDate,
-                                _projectDescription:projectDescription,_projectManager: projectManager,_productOwner: productOwner,
-                                _developmentTeam:developmentTeam});  
-    project.save()
-    .then((obj)=>{
-        res.status(200).json({
-            message: res.__('ok'),
-            error: false,
-            objs: obj
-        });
-    })
-    .catch((err)=>{
-        res.status(500).json({
-            message: res.__('error'),
-            error: true,
-            objs: err
-        });
+    let project = new Project({
+        _projectId: projectId, _projectName: projectName, _projectStatus: projectStatus, _applicationDate: applicationDate, _startDate: startDate,
+        _projectDescription: projectDescription, _projectManager: projectManager, _productOwner: productOwner,
+        _developmentTeam: developmentTeam
     });
+    project.save()
+        .then((obj) => {
+            res.status(200).json({
+                message: res.__('ok'),
+                error: false,
+                objs: obj
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: res.__('error'),
+                error: true,
+                objs: err
+            });
+        });
 }
 
-function update(req,res,next){
+function update(req, res, next) {
     let id = req.params.id;
-    Project.findOne({_projectId: id},(err,obj) =>{
-        if (err){
+    Project.findOne({ _projectId: id }, (err, obj) => {
+        if (err) {
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
         }
-        else{
+        else {
             obj._projectName = (req.body.projectName) ? req.body.projectName : obj._projectName;
+            obj._projectStatus = (req.body.projectStatus) ? req.body.projectStatus : obj._projectStatus;
             obj._applicationDate = (req.body.applicationDate) ? req.body.applicationDate : obj._applicationDate;
             obj._startDate = (req.body.startDate) ? req.body.startDate : obj._startDate;
             obj._projectDescription = (req.body.projectDescription) ? req.body.projectDescription : obj._projectDescription;
@@ -89,34 +93,34 @@ function update(req,res,next){
             obj._productOwner = (req.body.productOwner) ? req.body.productOwner : obj._productOwner;
             obj._developmentTeam = (req.body.developmentTeam) ? req.body.developmentTeam : obj._developmentTeam;
             obj.save()
-            .then(o =>{
-                res.status(200).json({
-                    message: res.__('ok'),
-                    error: false,
-                    objs: o
+                .then(o => {
+                    res.status(200).json({
+                        message: res.__('ok'),
+                        error: false,
+                        objs: o
+                    });
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        message: res.__('error'),
+                        error: true,
+                        objs: err
+                    });
                 });
-            })
-            .catch(err =>{
-                res.status(500).json({
-                    message: res.__('error'),
-                    error: true,
-                    objs: err
-                });
-            });
         }
     });
 }
 
-function destroy(req,res,next){
+function destroy(req, res, next) {
     let id = req.params.id;
-    Project.findOneAndDelete({_projectId : id},(err,resp) =>{
-        if (err){
+    Project.findOneAndDelete({ _projectId: id }, (err, resp) => {
+        if (err) {
             res.status(500).json({
                 message: res.__('error'),
                 error: true,
                 objs: err
             });
-        }else{
+        } else {
             res.status(200).json({
                 message: res.__('ok'),
                 error: false,
@@ -127,6 +131,6 @@ function destroy(req,res,next){
 }
 
 module.exports = {
-    list,index,create,update,destroy
+    list, index, create, update, destroy
 }
 
