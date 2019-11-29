@@ -37,7 +37,7 @@ class Card{
         return this._sprintId;
     }
     get projectId() {
-        return this._sprintId;
+        return this._projectId;
     }
     get cardPriority() {
         return this._cardPriority;

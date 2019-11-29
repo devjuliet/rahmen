@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 const schema = Schema({
     _projectId: Number,
@@ -80,6 +79,5 @@ class Project {
         this._developmentTeam = v;
     }
 }
-schema.plugin(mongoosePaginate);
 schema.loadClass(Project);
 module.exports = mongoose.model('Project', schema);

@@ -52,8 +52,14 @@ function create(req, res, next) {
     let developmentTeam = req.body.developmentTeam;
 
     let project = new Project({
-        _projectId: projectId, _projectName: projectName, _projectStatus: projectStatus, _applicationDate: applicationDate, _startDate: startDate,
-        _projectDescription: projectDescription, _projectManager: projectManager, _productOwner: productOwner,
+        _projectId: projectId, 
+        _projectName: projectName,
+        _projectStatus: projectStatus,
+        _applicationDate: applicationDate,
+        _startDate: startDate,
+        _projectDescription: projectDescription, 
+        _projectManager: projectManager, 
+        _productOwner: productOwner,
         _developmentTeam: developmentTeam
     });
     project.save()
