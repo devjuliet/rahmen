@@ -11,7 +11,7 @@ build_image:
     DOCKER_HOST: tcp://docker:2375
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build --pull -t $SERVER_TAG -f dockerfile ./server
+    - docker build --pull -t $SERVER_TAG -f dockerfile https://gitlab.com/accjuliet/rahmen.git#:server
     - docker push $SERVER_TAG
   only:
     - master
