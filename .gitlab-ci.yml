@@ -4,7 +4,7 @@ services:
 stages:
   - build_server
 build_image:
-  stage: build
+  stage: build_server
   variables:
     IMAGE: $CI_REGISTRY_IMAGE/server
     SERVER_TAG: $IMAGE:$CI_COMMIT_SHORT_SHA
