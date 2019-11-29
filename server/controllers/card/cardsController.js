@@ -85,18 +85,20 @@ function create(req, res, next){
 }
 
 function update(req,res,next){
+    console.log("Entro");
+    
     let id = req.params.id;
     Card.findOne({_cardId: id},(err,obj) =>{
         if (err){}
         else{
-            obj._sprintId = (req.body.sprintId) ? req.body.sprintId : obj._sprintId;
-            obj._cardPriority = (req.body.cardPriority) ? req.body.cardPriority : obj._cardPriority;
-            obj._cardName = (req.body.cardName) ? req.body.cardName : obj._cardName;
-            obj._role = (req.body.role) ? req.body.role : obj._role;
-            obj._feature = (req.body.feature) ? req.body.feature : obj._feature;
-            obj._benefict = (req.body.benefict) ? req.body.benefict : obj._benefict;
-            obj._context = (req.body.context) ? req.body.context : obj._context;
-            obj._status = (req.body.status) ? req.body.status : obj._status;
+            obj._sprintId = (req.body._sprintId) ? req.body._sprintId : obj._sprintId;
+            obj._cardPriority = (req.body._cardPriority) ? req.body._cardPriority : obj._cardPriority;
+            obj._cardName = (req.body._cardName) ? req.body._cardName : obj._cardName;
+            obj._role = (req.body._role) ? req.body._role : obj._role;
+            obj._feature = (req.body._feature) ? req.body._feature : obj._feature;
+            obj._benefict = (req.body._benefict) ? req.body._benefict : obj._benefict;
+            obj._context = (req.body._context) ? req.body._context : obj._context;
+            obj._status = (req.body._status) ? req.body._status : obj._status;
             //Si es arreglo lo mas natural es pushearle al arreglo
             if (Array.isArray(req.body.event)){
                 req.body.event.forEach(element => {

@@ -22,4 +22,7 @@ export class SprintService {
   getSprints(){
     return this.http.get(this.url);
   }
+  updateSprint(id: number, obj){
+    return this.http.put(this.url + `/${id}`, obj);
+  }
 }

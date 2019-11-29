@@ -19,4 +19,9 @@ export class CardService {
   getCards(){
     return this.http.get(this.url);
   }
+
+  updateCard(obj, id:number){
+    return this.http.put(this.url + `/${id}`, obj);
+    
+  }
 }

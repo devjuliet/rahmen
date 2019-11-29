@@ -13,6 +13,8 @@ import { SelectedSprintComponent } from './components/projects/selected-project/
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatDialogModule } from '@angular/material';
+import { RetrospectiveComponent } from './components/projects/selected-project/selected-sprint/retrospective/retrospective.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { MatCardModule, MatDialogModule } from '@angular/material';
     SelectedTeamComponent,
     SelectedProjectComponent,
     SelectedSprintComponent,
+    RetrospectiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { MatCardModule, MatDialogModule } from '@angular/material';
     DragDropModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

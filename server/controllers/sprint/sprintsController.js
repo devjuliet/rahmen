@@ -71,14 +71,18 @@ function update(req,res,next){
     Sprint.findOne({_sprintId: id},(err,obj) =>{
         if (err){}
         else{
-            obj._backlogType = (req.body.backlogType) ? req.body.backlogType : obj._backlogType;
-            obj._endDate = (req.body.endDate) ? req.body.endDate : obj._endDate;
-            if (req.body.what_went_well && req.body.what_could_be_improved && req.body.commit_to_improve){
+            obj._backlogType = (req.body._backlogType) ? req.body._backlogType : obj._backlogType;
+            obj._endDate = (req.body._endDate) ? req.body._endDate : obj._endDate;
+            if (req.body._retrospective._what_went_well && req.body._retrospective._what_could_be_improved && req.body._retrospective._commit_to_improve){
+                console.log("Cambio");
+                
                 obj._retrospective = {
-                    _what_went_well : req.body.what_went_well,
-                    _what_could_be_improved: req.body.what_could_be_improved,
-                    _commit_to_improve: req.body.commit_to_improve
+                    _id : obj._retrospective._id,
+                    _what_went_well : req.body._retrospective._what_went_well,
+                    _what_could_be_improved: req.body._retrospective._what_could_be_improved,
+                    _commit_to_improve: req.body._retrospective._commit_to_improve
                 }
+                
             }
             obj.save()
             .then(o =>{

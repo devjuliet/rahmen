@@ -1,5 +1,5 @@
 <div>
-    <div class="container-fluid h-75">
+    <div class="container-fluid h-75" *ngIf="(isVisible)">
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
@@ -15,10 +15,11 @@
 
         <!-- Page Content-->
         <div class="d-flex justify-content-between ">
-            <h1>Wendy's</h1>
-            <div class="h-50">
-                <a class="btn btn-primary mx-2" href="release.html" role="button">Create Retrospective</a>
-                <a class="btn btn-primary" href="burndown-chart.html" role="button">Burndown Chart</a>
+            <h1>{{selectedProyect._projectName}}</h1>
+            <div class="h-50"  >
+                <a class="btn btn-primary mx-2" (click)="change(!isVisible)" role="button">
+                    Retrospective
+                </a>
             </div>
         </div>
 
@@ -34,13 +35,13 @@
             [cdkDropListConnectedTo] = "[progressList, doneList]"
             (cdkDropListDropped) = "onDropEvent($event)">
                 <h3>To-do</h3>
-                <div class="card mb-3 box" *ngFor="let card of toDo" cdkDrag>
+                <div class="card mb-3 box " *ngFor="let card of toDo" cdkDrag>
                     <div class="card-header bg-primary text-white">
                         {{card.issue}}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{card.title}}</h5>
-                        <p class="card-text">{{card.desc}}</p>
+                        <h5 class="card-title">{{card._cardName}}</h5>
+                        <p class="card-text">{{card._feature}}</p>
                         <button type="button" class="btn btn-primary float-right" data-toggle="modal"
                             data-target="#card2897">
                             See more</button>
@@ -60,8 +61,8 @@
                         {{card.issue}}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{card.title}}</h5>
-                        <p class="card-text">{{card.desc}}</p>
+                        <h5 class="card-title">{{card._cardName}}</h5>
+                        <p class="card-text">{{card._feature}}</p>
                         <button type="button" class="btn btn-primary float-right" data-toggle="modal"
                             data-target="#card2897">
                             See more</button>
@@ -80,8 +81,8 @@
                         {{card.issue}}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{card.title}}</h5>
-                        <p class="card-text">{{card.desc}}</p>
+                        <h5 class="card-title">{{card._cardName}}</h5>
+                        <p class="card-text">{{card._feature}}</p>
                         <button type="button" class="btn btn-primary float-right" data-toggle="modal"
                             data-target="#card2897">
                             See more</button>
@@ -96,4 +97,5 @@
 
 
     </div>
+    <app-retrospective [isVisible] = "isVisible" (visible)="change($event)" *ngIf="(!isVisible)"></app-retrospective>
 </div>

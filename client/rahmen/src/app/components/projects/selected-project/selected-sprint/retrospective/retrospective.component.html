@@ -1,0 +1,72 @@
+<div class="container-fluid h-75">
+
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="projects.html">Projects</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="project-page.html">Wendy's</a>
+        </li>
+
+        <li class="breadcrumb-item active">Sprint {{selectedSprint._sprintId}} Retrospective</li>
+    </ol>
+
+    <!-- Page Content -->
+    <h1>{{selectedProyect._projectName}}</h1>
+    <hr>
+    <h3>Sprint {{selectedSprint._sprintId}} Retrospective</h3>
+    <hr>
+    <!-- <div id="board"> -->
+    <div class="row mb-3 h-100">
+        <div id="to-do-column" class="col-md mx-2 p-3">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    What went well
+                </div>
+                <div class="card-body">
+                    <textarea [(ngModel)]="www" *ngIf="isActive" class="form-control rounded-0 mt-3 mb-3" id="exampleFormControlTextarea2" rows="3"
+                        placeholder="Message"></textarea>
+                    <p *ngIf="!isActive">{{selectedSprint._retrospective._what_went_well}}</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    What could be improved
+                </div>
+                <div class="card-body">
+                    <textarea *ngIf="isActive" [(ngModel)]="wcbi" class="form-control rounded-0 mt-3 mb-3" id="exampleFormControlTextarea2" rows="3"
+                        placeholder="Message"></textarea>
+                        <p *ngIf="!isActive">{{selectedSprint._retrospective._what_could_be_improved}}</p>
+
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    What will we commit to improve in the next Sprint
+                </div>
+                <div class="card-body">
+                    <textarea *ngIf="isActive" [(ngModel)]="cti" class="form-control rounded-0 mt-3 mb-3" id="exampleFormControlTextarea2" rows="3"
+                        placeholder="Message"></textarea>
+                        <p *ngIf="!isActive">{{selectedSprint._retrospective._commit_to_improve}}</p>
+
+                </div>
+            </div>
+
+            <button class="btn btn-primary float-right" (click) = "submit()">
+                <p *ngIf="isActive">Send Restrospective</p>
+                <p *ngIf="!isActive">Close</p>
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+</div>
